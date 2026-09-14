@@ -1,17 +1,54 @@
 ---
-
+import { getHomepage } from '../lib/strapi';
+const page = await getHomepage();
 ---
-
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={page.introduction} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{page.name} — {page.role}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="#top" aria-label={`${page.name}, home`}>{page.name}</a>
+      <nav aria-label="Primary navigation"><a href="#about">About</a><a href={`mailto:${page.email}`}>Let’s talk ↗</a></nav>
+    </header>
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow">{page.availability}</p>
+        <h1 id="hero-title">{page.role}</h1>
+        <p class="intro">{page.introduction}</p>
+        <div class="hero-footer"><span>{page.location}</span><a href={`mailto:${page.email}`}>{page.email} ↗</a></div>
+      </section>
+      <section class="about" id="about" aria-labelledby="about-title">
+        <p class="section-label">01 / About</p>
+        <div><h2 id="about-title">{page.aboutTitle}</h2><p>{page.aboutBody}</p></div>
+      </section>
+      <section class="services" aria-labelledby="services-title">
+        <p class="section-label" id="services-title">02 / What I do</p>
+        <div class="service-list">
+          {page.services.map((service, index) => <article><span>0{index + 1}</span><h3>{service.title}</h3><p>{service.description}</p></article>)}
+        </div>
+      </section>
+    </main>
+    <footer><p>Have a product worth making clear?</p><a href={`mailto:${page.email}`}>Start a conversation ↗</a><small>© {new Date().getFullYear()} {page.name}</small></footer>
+  </body>
 </html>
+<style is:global>
+  :root { color-scheme: light; --ink:#171714; --paper:#f1efe8; --acid:#dfff57; --muted:#6a6961; }
+  * { box-sizing:border-box; } html { scroll-behavior:smooth; } body { margin:0; background:var(--paper); color:var(--ink); font-family:'DM Sans',sans-serif; } a { color:inherit; text-decoration:none; }
+  header { display:flex; justify-content:space-between; align-items:center; padding:28px 4vw; border-bottom:1px solid #1717142e; } .brand { font-weight:600; letter-spacing:-.03em; } nav { display:flex; gap:clamp(22px,4vw,56px); font-size:.9rem; }
+  main,footer { margin-inline:4vw; } .hero { min-height:82vh; display:flex; flex-direction:column; justify-content:space-between; padding:clamp(48px,9vh,108px) 0 36px; }
+  .eyebrow,.section-label { text-transform:uppercase; letter-spacing:.13em; font-size:.72rem; font-weight:600; } h1 { max-width:1100px; margin:auto 0 12px; font:500 clamp(4.2rem,12vw,10.5rem)/.82 'Manrope',sans-serif; letter-spacing:-.075em; }
+  .intro { max-width:690px; margin:16px 0 60px; font-size:clamp(1.25rem,2.5vw,2.1rem); line-height:1.28; letter-spacing:-.035em; } .hero-footer { display:flex; justify-content:space-between; gap:24px; color:var(--muted); font-size:.9rem; } .hero-footer a,footer a { color:var(--ink); border-bottom:1px solid; padding-bottom:3px; }
+  .about,.services { display:grid; grid-template-columns:1fr 3fr; gap:40px; padding:120px 0; border-top:1px solid #1717142e; } h2 { max-width:850px; margin:0; font:500 clamp(2.4rem,6vw,5.6rem)/1 'Manrope',sans-serif; letter-spacing:-.06em; } .about div>p { max-width:680px; margin:45px 0 0 auto; color:var(--muted); font-size:1.25rem; line-height:1.55; }
+  .service-list article { display:grid; grid-template-columns:50px 1fr 1.2fr; gap:24px; padding:28px 0; border-top:1px solid #1717142e; } .service-list article:first-child { border-top:0; padding-top:0; } article span { color:var(--muted); font-size:.75rem; } h3 { margin:0; font:500 1.45rem 'Manrope',sans-serif; letter-spacing:-.03em; } article p { margin:0; color:var(--muted); line-height:1.55; }
+  footer { margin-bottom:4vw; padding:clamp(60px,10vw,130px) clamp(30px,6vw,90px) 35px; background:var(--ink); color:var(--paper); } footer p { max-width:900px; margin:0 0 45px; font:500 clamp(2.8rem,7vw,7rem)/.98 'Manrope',sans-serif; letter-spacing:-.06em; } footer a { display:inline-block; color:var(--acid); } footer small { display:block; margin-top:100px; color:#aaa99f; }
+  @media(max-width:700px) { header{padding-block:22px} nav a:first-child{display:none}.hero{min-height:76vh} h1{font-size:clamp(3.7rem,19vw,7rem)}.hero-footer{flex-direction:column}.about,.services{grid-template-columns:1fr;padding:80px 0}.about div>p{margin-left:0}.service-list article{grid-template-columns:34px 1fr}.service-list article p{grid-column:2} }
+</style>
