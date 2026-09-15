@@ -1,24 +1,50 @@
 ---
+import { Icon } from "astro-icon/components";
 import type { Service } from "../content/homepage";
 
 interface Props {
   services: Service[];
+  yearsExperience: string;
+  projectCount: string;
 }
 
-const { services } = Astro.props;
+const { services, yearsExperience, projectCount } = Astro.props;
 ---
 
-<section class="services" aria-labelledby="services-title">
-  <p class="section-label" id="services-title">
-    02 / What I do
-  </p>
-  <div class="service-list">
-    {services.map((service, index) => (
-      <article>
-        <span>0{index + 1}</span>
-        <h3>{service.title}</h3>
-        <p>{service.description}</p>
-      </article>
+<section class="work-grid" id="work" aria-label="Portfolio overview">
+  <a class="featured-work" href="#services" aria-label="View selected work">
+    <span class="project-kicker">Selected work</span>
+    <span class="project-arrow">
+      <Icon name="hugeicons:arrow-up-right-01" size={18} />
+    </span>
+    <div class="project-window" aria-hidden="true">
+      <div class="window-bar">
+        <i></i>
+        <i></i>
+        <i></i>
+      </div>
+      <div class="window-body">
+        <strong>UX/UI</strong>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </a>
+
+  <div class="metrics">
+    <article class="metric experience">
+      <strong>+ {yearsExperience}</strong>
+      <span>Years of experience</span>
+    </article>
+    <article class="metric projects">
+      <strong>+ {projectCount}</strong>
+      <span>Projects</span>
+    </article>
+  </div>
+
+  <div class="service-strip" id="services">
+    {services.map((service) => (
+      <span>{service.title}</span>
     ))}
   </div>
 </section>

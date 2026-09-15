@@ -18,7 +18,7 @@ const { title, description } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -30,233 +30,430 @@ const { title, description } = Astro.props;
 <style is:global>
   :root {
     color-scheme: light;
-    --ink: #171714;
-    --paper: #f1efe8;
-    --acid: #dfff57;
-    --muted: #6a6961;
+    --ink: #283d38;
+    --paper: #f7f4ee;
+    --white: #fff;
+    --lavender: #737da8;
+    --lavender-soft: #e2e4ee;
+    --purple: #9876cf;
+    --mint: #d4e9df;
+    --sand: #f4dca8;
+    --radius: 28px;
   }
 
   * {
     box-sizing: border-box;
   }
-
   html {
     scroll-behavior: smooth;
   }
-
   body {
     margin: 0;
     background: var(--paper);
     color: var(--ink);
     font-family: "DM Sans", sans-serif;
   }
-
   a {
     color: inherit;
     text-decoration: none;
   }
 
-  header {
+  .site-shell {
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: 76px minmax(0, 1fr);
+  }
+
+  .side-rail {
+    position: sticky;
+    top: 0;
+    z-index: 20;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 28px 4vw;
-    border-bottom: 1px solid #1717142e;
-  }
-
-  .brand {
-    font-weight: 600;
-    letter-spacing: -0.03em;
-  }
-
-  nav {
-    display: flex;
-    gap: clamp(22px, 4vw, 56px);
-    font-size: 0.9rem;
-  }
-
-  nav a,
-  .hero-footer a,
-  footer a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3em;
-  }
-
-  main,
-  footer {
-    margin-inline: 4vw;
-  }
-
-  .hero {
-    display: flex;
-    min-height: 82vh;
+    height: 100vh;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
-    padding: clamp(48px, 9vh, 108px) 0 36px;
+    padding: 30px 12px;
+    border-right: 1px solid #e6e3dc;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(18px);
   }
 
-  .eyebrow,
-  .section-label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.13em;
+  .monogram {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border-radius: 11px;
+    background: var(--lavender);
+    color: white;
+    font-weight: 800;
+  }
+  .side-rail nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .side-rail nav a,
+  .rail-mail {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    border-radius: 13px;
+    color: var(--lavender);
+    transition: 180ms ease;
+  }
+  .side-rail nav a:hover,
+  .side-rail nav a:focus-visible,
+  .side-rail nav a.active {
+    background: var(--lavender-soft);
+    color: #58638e;
+    outline: none;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    width: min(1180px, calc(100% - 64px));
+    margin: auto;
+    padding: 52px 0;
+    grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+    gap: 20px;
+  }
+  .dashboard {
+    display: grid;
+    align-content: start;
+    gap: 20px;
+  }
+
+  .profile-card {
+    position: sticky;
+    top: 52px;
+    display: flex;
+    height: calc(100vh - 104px);
+    min-height: 640px;
+    max-height: 760px;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 24px 24px 0;
+    border-radius: var(--radius);
+    background: linear-gradient(155deg, #e4e6ee, #d8dbe5);
+    color: #606b97;
+  }
+  .availability {
+    align-self: flex-start;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.85);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
   }
-
-  h1 {
-    max-width: 1100px;
-    margin: auto 0 12px;
+  .profile-copy {
+    position: relative;
+    z-index: 1;
+    margin-top: 42px;
+  }
+  .profile-copy h2 {
+    margin: 0 0 18px;
     font:
-      500 clamp(4.2rem, 12vw, 10.5rem) / 0.82 "Manrope",
+      800 clamp(1.7rem, 3vw, 2.2rem)/1 "Manrope",
+      sans-serif;
+    letter-spacing: -0.045em;
+  }
+  .profile-copy p {
+    max-width: 28ch;
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .portrait-placeholder {
+    position: relative;
+    display: grid;
+    min-height: 290px;
+    flex: 1;
+    margin: 30px -24px 0;
+    place-items: end center;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 35%, #9ca4bd 0 20%, transparent 21%),
+      linear-gradient(150deg, transparent 44%, #656d85 45% 100%);
+  }
+  .portrait-placeholder span {
+    margin-bottom: 36px;
+    color: rgba(255, 255, 255, 0.7);
+    font:
+      800 5rem "Manrope",
+      sans-serif;
+    letter-spacing: -0.08em;
+  }
+
+  .masthead {
+    display: flex;
+    min-height: 218px;
+    flex-direction: column;
+    justify-content: center;
+    padding: 34px 40px;
+    border-radius: var(--radius);
+    background: var(--white);
+    color: var(--lavender);
+  }
+  .masthead p {
+    margin: 0 0 14px;
+    font-size: 1.65rem;
+    font-weight: 800;
+  }
+  .masthead h1 {
+    margin: 0;
+    font:
+      800 clamp(4rem, 8vw, 6.5rem)/0.88 "Manrope",
       sans-serif;
     letter-spacing: -0.075em;
   }
-
-  .intro {
-    max-width: 690px;
-    margin: 16px 0 60px;
-    font-size: clamp(1.25rem, 2.5vw, 2.1rem);
-    line-height: 1.28;
-    letter-spacing: -0.035em;
+  .masthead h1 span {
+    color: var(--purple);
   }
 
-  .hero-footer {
+  .work-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 180px;
+    gap: 18px;
+  }
+  .featured-work {
+    position: relative;
     display: flex;
-    justify-content: space-between;
-    gap: 24px;
-    color: var(--muted);
-    font-size: 0.9rem;
+    min-height: 255px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid #e7c77d;
+    border-radius: var(--radius);
+    background: radial-gradient(circle at 40% 20%, #fff3d7, var(--sand));
   }
-
-  .hero-footer a,
-  footer a {
-    padding-bottom: 3px;
-    border-bottom: 1px solid;
-    color: var(--ink);
-  }
-
-  .about,
-  .services {
-    display: grid;
-    padding: 120px 0;
-    border-top: 1px solid #1717142e;
-    grid-template-columns: 1fr 3fr;
-    gap: 40px;
-  }
-
-  h2 {
-    max-width: 850px;
-    margin: 0;
-    font:
-      500 clamp(2.4rem, 6vw, 5.6rem) / 1 "Manrope",
-      sans-serif;
-    letter-spacing: -0.06em;
-  }
-
-  .about div > p {
-    max-width: 680px;
-    margin: 45px 0 0 auto;
-    color: var(--muted);
-    font-size: 1.25rem;
-    line-height: 1.55;
-  }
-
-  .service-list article {
-    display: grid;
-    padding: 28px 0;
-    border-top: 1px solid #1717142e;
-    grid-template-columns: 50px 1fr 1.2fr;
-    gap: 24px;
-  }
-
-  .service-list article:first-child {
-    padding-top: 0;
-    border-top: 0;
-  }
-
-  article span {
-    color: var(--muted);
+  .project-kicker {
+    position: absolute;
+    top: 24px;
+    left: 28px;
+    color: #7d6848;
     font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
-
-  h3 {
-    margin: 0;
-    font:
-      500 1.45rem "Manrope",
-      sans-serif;
-    letter-spacing: -0.03em;
+  .project-arrow {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 8px 20px #7c63352a;
   }
-
-  article p {
-    margin: 0;
-    color: var(--muted);
-    line-height: 1.55;
+  .project-window {
+    width: min(72%, 390px);
+    overflow: hidden;
+    border: 1px solid #d9d8df;
+    border-radius: 13px;
+    background: white;
+    box-shadow: 0 22px 28px #69572d38;
+    transform: translateY(18px);
   }
-
-  footer {
-    margin-bottom: 4vw;
-    padding: clamp(60px, 10vw, 130px) clamp(30px, 6vw, 90px) 35px;
-    background: var(--ink);
-    color: var(--paper);
+  .window-bar {
+    display: flex;
+    height: 28px;
+    align-items: center;
+    gap: 5px;
+    padding: 0 12px;
+    background: #f5f4f7;
   }
-
-  footer p {
-    max-width: 900px;
-    margin: 0 0 45px;
-    font:
-      500 clamp(2.8rem, 7vw, 7rem) / 0.98 "Manrope",
-      sans-serif;
-    letter-spacing: -0.06em;
+  .window-bar i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #d5d4d9;
   }
-
-  footer a {
-    color: var(--acid);
+  .window-body {
+    display: grid;
+    min-height: 128px;
+    align-content: center;
+    padding: 24px;
+    background: linear-gradient(90deg, #74798e 48%, #f4f2f6 48%);
+    color: white;
   }
-
-  footer small {
+  .window-body span {
     display: block;
-    margin-top: 100px;
-    color: #aaa99f;
+    width: 34%;
+    height: 8px;
+    margin-top: 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
   }
 
-  @media (max-width: 700px) {
-    header {
-      padding-block: 22px;
-    }
+  .metrics {
+    display: grid;
+    gap: 18px;
+  }
+  .metric {
+    display: flex;
+    min-height: 118px;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 26px 22px 20px;
+    border-radius: 0 0 26px 26px;
+  }
+  .metric strong {
+    font:
+      800 1.8rem "Manrope",
+      sans-serif;
+  }
+  .metric span {
+    font-size: 0.78rem;
+  }
+  .experience {
+    background: var(--mint);
+    color: #316451;
+  }
+  .projects {
+    background: var(--lavender);
+    color: white;
+  }
+  .service-strip {
+    display: flex;
+    grid-column: 1 / -1;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .service-strip span {
+    padding: 9px 13px;
+    border: 1px solid #dedbe3;
+    border-radius: 999px;
+    background: white;
+    color: #677096;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
 
-    nav a:first-child {
-      display: none;
-    }
+  .details-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 285px;
+    gap: 18px;
+  }
+  .role-card {
+    min-height: 145px;
+    padding: 32px;
+    border-radius: var(--radius);
+    background: var(--lavender);
+    color: white;
+  }
+  .role-card h2 {
+    margin: 0 0 8px;
+    font:
+      700 clamp(1.5rem, 3vw, 2rem) "Manrope",
+      sans-serif;
+  }
+  .role-card p {
+    max-width: 65ch;
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+  .quick-links {
+    display: grid;
+    gap: 14px;
+  }
+  .quick-links span,
+  .quick-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 65px;
+    padding: 16px;
+    border-radius: 999px;
+    background: #e8e2ec;
+    color: #8b70bc;
+    font-weight: 700;
+    text-align: center;
+  }
+  .quick-links a {
+    background: #dfe2ec;
+    color: #69749d;
+  }
 
-    .hero {
-      min-height: 76vh;
-    }
-
-    h1 {
-      font-size: clamp(3.7rem, 19vw, 7rem);
-    }
-
-    .hero-footer {
-      flex-direction: column;
-    }
-
-    .about,
-    .services {
-      padding: 80px 0;
+  @media (max-width: 920px) {
+    .portfolio-grid {
+      width: min(680px, calc(100% - 40px));
       grid-template-columns: 1fr;
     }
-
-    .about div > p {
-      margin-left: 0;
+    .profile-card {
+      position: relative;
+      top: auto;
+      height: 560px;
+      min-height: 0;
     }
-
-    .service-list article {
-      grid-template-columns: 34px 1fr;
+    .portrait-placeholder {
+      min-height: 260px;
     }
+  }
 
-    .service-list article p {
-      grid-column: 2;
+  @media (max-width: 650px) {
+    .site-shell {
+      display: block;
+      padding-bottom: 78px;
+    }
+    .side-rail {
+      position: fixed;
+      top: auto;
+      right: 12px;
+      bottom: 12px;
+      left: 12px;
+      width: auto;
+      height: 62px;
+      flex-direction: row;
+      padding: 9px 12px;
+      border: 1px solid #dedbe3;
+      border-radius: 20px;
+      box-shadow: 0 14px 38px #4e49602e;
+    }
+    .side-rail nav {
+      flex-direction: row;
+    }
+    .rail-mail {
+      display: none;
+    }
+    .portfolio-grid {
+      width: calc(100% - 28px);
+      padding: 20px 0;
+    }
+    .profile-card {
+      height: 520px;
+    }
+    .masthead {
+      min-height: 170px;
+      padding: 28px;
+    }
+    .masthead h1 {
+      font-size: clamp(3.2rem, 17vw, 5rem);
+    }
+    .work-grid,
+    .details-grid {
+      grid-template-columns: 1fr;
+    }
+    .metrics {
+      grid-template-columns: 1fr 1fr;
+    }
+    .metric {
+      min-height: 125px;
+    }
+    .service-strip {
+      grid-column: auto;
+    }
+    .quick-links {
+      grid-template-columns: 1fr;
     }
   }
 </style>

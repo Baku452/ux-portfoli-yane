@@ -1,16 +1,28 @@
 ---
+import type { Homepage } from "../content/homepage";
+
 interface Props {
-  title: string;
-  body: string;
+  page: Homepage;
 }
 
-const { title, body } = Astro.props;
+const { page } = Astro.props;
+const initials = page.name
+  .split(" ")
+  .map((part) => part[0])
+  .join("");
 ---
 
-<section class="about" id="about" aria-labelledby="about-title">
-  <p class="section-label">01 / About</p>
-  <div>
-    <h2 id="about-title">{title}</h2>
-    <p>{body}</p>
+<section class="profile-card" id="about" aria-labelledby="profile-title">
+  <span class="availability">✦ Available ✦</span>
+  <div class="profile-copy">
+    <h2 id="profile-title">{page.name}</h2>
+    <p>{page.introduction}</p>
+  </div>
+  <div
+    class="portrait-placeholder"
+    aria-label={`${page.name} portrait placeholder`}
+    role="img"
+  >
+    <span>{initials}</span>
   </div>
 </section>

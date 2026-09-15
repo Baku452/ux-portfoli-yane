@@ -2,22 +2,31 @@
 import { Icon } from "astro-icon/components";
 
 interface Props {
-  name: string;
   email: string;
 }
 
-const { name, email } = Astro.props;
+const { email } = Astro.props;
 ---
 
-<header>
-  <a class="brand" href="#top" aria-label={`${name}, home`}>
-    {name}
+<aside class="side-rail">
+  <a class="monogram" href="#top" aria-label="Go to top">
+    Y
   </a>
   <nav aria-label="Primary navigation">
-    <a href="#about">About</a>
-    <a href={`mailto:${email}`}>
-      Let’s talk
-      <Icon name="hugeicons:arrow-up-right-01" size={16} aria-hidden="true" />
+    <a class="active" href="#top" aria-label="Home">
+      <Icon name="hugeicons:home-01" size={20} />
+    </a>
+    <a href="#work" aria-label="Selected work">
+      <Icon name="hugeicons:grid-view" size={20} />
+    </a>
+    <a href="#about" aria-label="About">
+      <Icon name="hugeicons:user" size={20} />
+    </a>
+    <a href={`mailto:${email}`} aria-label="Email">
+      <Icon name="hugeicons:mail-01" size={20} />
     </a>
   </nav>
-</header>
+  <a class="rail-mail" href={`mailto:${email}`} aria-label="Email">
+    <Icon name="hugeicons:mail-01" size={19} />
+  </a>
+</aside>

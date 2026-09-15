@@ -2,20 +2,26 @@
 import { Icon } from "astro-icon/components";
 
 interface Props {
-  name: string;
-  email: string;
+  role: string;
+  about: string;
+  location: string;
+  resumeUrl: string;
 }
 
-const { name, email } = Astro.props;
+const { role, about, location, resumeUrl } = Astro.props;
 ---
 
-<footer>
-  <p>Have a product worth making clear?</p>
-  <a href={`mailto:${email}`}>
-    Start a conversation
-    <Icon name="hugeicons:arrow-up-right-01" size={16} aria-hidden="true" />
-  </a>
-  <small>
-    © {new Date().getFullYear()} {name}
-  </small>
-</footer>
+<section class="details-grid" aria-label="Profile details">
+  <article class="role-card">
+    <h2>{role}</h2>
+    <p>{about}</p>
+  </article>
+  <div class="quick-links">
+    <span>
+      <Icon name="hugeicons:location-01" size={20} /> {location}
+    </span>
+    <a href={resumeUrl} download>
+      <Icon name="hugeicons:download-04" size={20} /> Download CV
+    </a>
+  </div>
+</section>

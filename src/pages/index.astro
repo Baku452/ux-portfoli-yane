@@ -12,13 +12,24 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   title={`${homepage.name} — ${homepage.role}`}
   description={homepage.introduction}
 >
-  <NavBar name={homepage.name} email={homepage.email} />
-
-  <main id="top">
-    <Hero page={homepage} />
-    <About title={homepage.aboutTitle} body={homepage.aboutBody} />
-    <Services services={homepage.services} />
-  </main>
-
-  <Footer name={homepage.name} email={homepage.email} />
+  <div class="site-shell" id="top">
+    <NavBar email={homepage.email} />
+    <main class="portfolio-grid">
+      <About page={homepage} />
+      <div class="dashboard">
+        <Hero page={homepage} />
+        <Services
+          services={homepage.services}
+          yearsExperience={homepage.yearsExperience}
+          projectCount={homepage.projectCount}
+        />
+        <Footer
+          role={homepage.role}
+          about={homepage.aboutBody}
+          location={homepage.location}
+          resumeUrl={homepage.resumeUrl}
+        />
+      </div>
+    </main>
+  </div>
 </BaseLayout>
