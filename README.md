@@ -32,7 +32,7 @@ The site uses Hugeicons through Astro Icon. Import the component and reference a
 
 ```astro
 ---
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 ---
 
 <Icon name="hugeicons:arrow-up-right-01" size={16} />

@@ -4,11 +4,12 @@ import type { Service } from "../content/homepage";
 
 interface Props {
   services: Service[];
-  yearsExperience: string;
+  experienceStartYear: number;
   projectCount: string;
 }
 
-const { services, yearsExperience, projectCount } = Astro.props;
+const { services, experienceStartYear, projectCount } = Astro.props;
+const yearsExperience = new Date().getFullYear() - experienceStartYear;
 ---
 
 <section class="work-grid" id="work" aria-label="Portfolio overview">
@@ -33,7 +34,7 @@ const { services, yearsExperience, projectCount } = Astro.props;
 
   <div class="metrics">
     <article class="metric experience">
-      <strong>+ {yearsExperience}</strong>
+      <strong>+ {String(yearsExperience).padStart(2, "0")}</strong>
       <span>Years of experience</span>
     </article>
     <article class="metric projects">

@@ -13,7 +13,7 @@ export interface Homepage {
   aboutTitle: string;
   aboutBody: string;
   services: Service[];
-  yearsExperience: string;
+  experienceStartYear: number;
   projectCount: string;
   resumeUrl: string;
 }
@@ -30,7 +30,7 @@ export const homepage: Homepage = {
   aboutTitle: "Designing with curiosity, clarity, and care.",
   aboutBody:
     "I partner with ambitious teams to understand their users, sharpen the product story, and design experiences that feel inevitable.",
-  yearsExperience: "02",
+  experienceStartYear: 2024,
   projectCount: "03",
   resumeUrl: "/resume.pdf",
   services: [
