@@ -26,6 +26,20 @@ npm run preview
 
 The production site is generated in `dist/` and can be deployed to any static host, including Cloudflare Pages, Netlify, or Vercel.
 
+## Icons
+
+The site uses Hugeicons through Astro Icon. Import the component and reference an icon with the `hugeicons:` prefix:
+
+```astro
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<Icon name="hugeicons:arrow-up-right-01" size={16} />
+```
+
+Browse the Hugeicons collection on the Iconify website to find icon names.
+
 For Cloudflare Pages, use:
 
 - Build command: `npm run build`

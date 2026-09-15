@@ -1,0 +1,23 @@
+---
+import { Icon } from "astro-icon/components";
+import type { Homepage } from "../content/homepage";
+
+interface Props {
+  page: Homepage;
+}
+
+const { page } = Astro.props;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <p class="eyebrow">{page.availability}</p>
+  <h1 id="hero-title">{page.role}</h1>
+  <p class="intro">{page.introduction}</p>
+  <div class="hero-footer">
+    <span>{page.location}</span>
+    <a href={`mailto:${page.email}`}>
+      {page.email}
+      <Icon name="hugeicons:arrow-up-right-01" size={16} aria-hidden="true" />
+    </a>
+  </div>
+</section>
