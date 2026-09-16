@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import profileImage from "../assets/profile.png";
 import type { Homepage } from "../content/homepage";
 
 interface Props {
@@ -6,23 +8,23 @@ interface Props {
 }
 
 const { page } = Astro.props;
-const initials = page.name
-  .split(" ")
-  .map((part) => part[0])
-  .join("");
 ---
 
 <section class="profile-card" id="about" aria-labelledby="profile-title">
-  <span class="availability">✦ Available ✦</span>
+  <span class="availability">✦ Ayab ✦</span>
   <div class="profile-copy">
     <h2 id="profile-title">{page.name}</h2>
     <p>{page.introduction}</p>
   </div>
-  <div
-    class="portrait-placeholder"
-    aria-label={`${page.name} portrait placeholder`}
-    role="img"
-  >
-    <span>{initials}</span>
+  <div class="portrait">
+    <Image
+      class="portrait-image"
+      src={profileImage}
+      alt={page.labels.portraitAlt}
+      width={305}
+      height={394}
+      quality={90}
+      loading="eager"
+    />
   </div>
 </section>

@@ -1,0 +1,57 @@
+---
+import type { Locale } from "../content/homepage";
+
+interface Props {
+  locale: Locale;
+  label: string;
+}
+
+const { locale, label } = Astro.props;
+const alternateHref = locale === "en" ? "/es/" : "/";
+---
+
+<a
+  class="language-toggle"
+  href={alternateHref}
+  hreflang={locale === "en" ? "es" : "en"}
+  aria-label={label}
+  data-language-toggle
+  data-locale={locale}
+  transition:name="language-switch"
+>
+  <span class="toggle-thumb" aria-hidden="true"></span>
+  <span lang="en">EN</span>
+  <span lang="es">ES</span>
+</a>
+
+<script>
+  import { navigate } from "astro:transitions/client";
+
+  document.addEventListener("click", (event) => {
+    const clickedElement = event.target;
+    if (!(clickedElement instanceof Element)) return;
+
+    const toggle = clickedElement.closest<HTMLAnchorElement>(
+      "[data-language-toggle]",
+    );
+    if (!toggle) return;
+    if (
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    )
+      return;
+
+    event.preventDefault();
+    const destination = toggle.href;
+    toggle.dataset.locale = toggle.dataset.locale === "en" ? "es" : "en";
+    toggle.setAttribute("aria-busy", "true");
+
+    const delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? 0
+      : 220;
+    window.setTimeout(() => navigate(destination), delay);
+  });
+</script>

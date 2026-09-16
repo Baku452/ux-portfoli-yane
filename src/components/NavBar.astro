@@ -1,32 +1,34 @@
 ---
 import { Icon } from "astro-icon/components";
+import type { Labels } from "../content/homepage";
 
 interface Props {
   email: string;
+  labels: Labels;
 }
 
-const { email } = Astro.props;
+const { email, labels } = Astro.props;
 ---
 
 <aside class="side-rail">
-  <a class="monogram" href="#top" aria-label="Go to top">
-    Y
+  <a class="monogram" href="#top" aria-label={labels.home}>
+    <img src="/favicon.svg" alt="" width="47" height="47" />
   </a>
-  <nav aria-label="Primary navigation">
-    <a class="active" href="#top" aria-label="Home">
+  <nav aria-label={labels.home}>
+    <a class="active" href="#top" aria-label={labels.home}>
       <Icon name="hugeicons:home-01" size={20} />
     </a>
-    <a href="#work" aria-label="Selected work">
+    <a href="#work" aria-label={labels.selectedWork}>
       <Icon name="hugeicons:grid-view" size={20} />
     </a>
-    <a href="#about" aria-label="About">
+    <a href="#about" aria-label={labels.about}>
       <Icon name="hugeicons:user" size={20} />
     </a>
-    <a href={`mailto:${email}`} aria-label="Email">
+    <a href={`mailto:${email}`} aria-label={labels.email}>
       <Icon name="hugeicons:mail-01" size={20} />
     </a>
   </nav>
-  <a class="rail-mail" href={`mailto:${email}`} aria-label="Email">
+  <a class="rail-mail" href={`mailto:${email}`} aria-label={labels.email}>
     <Icon name="hugeicons:mail-01" size={19} />
   </a>
 </aside>

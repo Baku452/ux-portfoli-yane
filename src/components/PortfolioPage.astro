@@ -1,0 +1,46 @@
+---
+import About from "./About.astro";
+import Footer from "./Footer.astro";
+import Hero from "./Hero.astro";
+import LanguageSwitch from "./LanguageSwitch.astro";
+import NavBar from "./NavBar.astro";
+import Services from "./Services.astro";
+import type { Homepage } from "../content/homepage";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+interface Props {
+  page: Homepage;
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout
+  title={`${page.name} — ${page.role}`}
+  description={page.introduction}
+  lang={page.locale}
+>
+  <div class="site-shell" id="top">
+    <NavBar email={page.email} labels={page.labels} />
+    <LanguageSwitch locale={page.locale} label={page.labels.languageSwitch} />
+    <main class="portfolio-grid">
+      <About page={page} />
+      <div class="dashboard">
+        <Hero page={page} />
+        <Services
+          services={page.services}
+          experienceStartYear={page.experienceStartYear}
+          projectCount={page.projectCount}
+          labels={page.labels}
+        />
+        <Footer
+          role={page.role}
+          about={page.aboutBody}
+          location={page.location}
+          resumeUrl={page.resumeUrl}
+          labels={page.labels}
+        />
+      </div>
+    </main>
+  </div>
+</BaseLayout>

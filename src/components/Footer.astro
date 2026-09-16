@@ -1,17 +1,19 @@
 ---
 import { Icon } from "astro-icon/components";
+import type { Labels } from "../content/homepage";
 
 interface Props {
   role: string;
   about: string;
   location: string;
   resumeUrl: string;
+  labels: Labels;
 }
 
-const { role, about, location, resumeUrl } = Astro.props;
+const { role, about, location, resumeUrl, labels } = Astro.props;
 ---
 
-<section class="details-grid" aria-label="Profile details">
+<section class="details-grid" aria-label={labels.profileDetails}>
   <article class="role-card">
     <h2>{role}</h2>
     <p>{about}</p>
@@ -21,7 +23,7 @@ const { role, about, location, resumeUrl } = Astro.props;
       <Icon name="hugeicons:location-01" size={20} /> {location}
     </span>
     <a href={resumeUrl} download>
-      <Icon name="hugeicons:download-04" size={20} /> Download CV
+      <Icon name="hugeicons:download-04" size={20} /> {labels.downloadCv}
     </a>
   </div>
 </section>

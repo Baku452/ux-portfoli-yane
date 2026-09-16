@@ -1,20 +1,25 @@
 ---
 import { Icon } from "astro-icon/components";
-import type { Service } from "../content/homepage";
+import type { Labels, Service } from "../content/homepage";
 
 interface Props {
   services: Service[];
   experienceStartYear: number;
   projectCount: string;
+  labels: Labels;
 }
 
-const { services, experienceStartYear, projectCount } = Astro.props;
+const { services, experienceStartYear, projectCount, labels } = Astro.props;
 const yearsExperience = new Date().getFullYear() - experienceStartYear;
 ---
 
-<section class="work-grid" id="work" aria-label="Portfolio overview">
-  <a class="featured-work" href="#services" aria-label="View selected work">
-    <span class="project-kicker">Selected work</span>
+<section class="work-grid" id="work" aria-label={labels.portfolioOverview}>
+  <a
+    class="featured-work"
+    href="#services"
+    aria-label={labels.viewSelectedWork}
+  >
+    <span class="project-kicker">{labels.selectedWork}</span>
     <span class="project-arrow">
       <Icon name="hugeicons:arrow-up-right-01" size={18} />
     </span>
@@ -35,11 +40,11 @@ const yearsExperience = new Date().getFullYear() - experienceStartYear;
   <div class="metrics">
     <article class="metric experience">
       <strong>+ {String(yearsExperience).padStart(2, "0")}</strong>
-      <span>Years of experience</span>
+      <span>{labels.yearsExperience}</span>
     </article>
     <article class="metric projects">
       <strong>+ {projectCount}</strong>
-      <span>Projects</span>
+      <span>{labels.projects}</span>
     </article>
   </div>
 
