@@ -5,6 +5,20 @@ export interface Service {
   description: string;
 }
 
+export interface Project {
+  client: string;
+  title: string;
+  description: string;
+  url: string;
+}
+
+export interface StudyCase {
+  client: string;
+  title: string;
+  description: string;
+  url: string;
+}
+
 export interface Labels {
   home: string;
   selectedWork: string;
@@ -15,6 +29,11 @@ export interface Labels {
   viewSelectedWork: string;
   yearsExperience: string;
   projects: string;
+  featuredProjects: string;
+  caseStudies: string;
+  caseStudiesTitle: string;
+  viewMore: string;
+  viewCaseStudy: string;
   profileDetails: string;
   downloadCv: string;
   portraitAlt: string;
@@ -34,6 +53,8 @@ export interface Homepage {
   services: Service[];
   experienceStartYear: number;
   projectCount: string;
+  featuredProject: Project;
+  projects: Project[];
   resumeUrl: string;
   labels: Labels;
 }
@@ -75,6 +96,29 @@ export const homepages: Record<Locale, Homepage> = {
           "Expressive, accessible interfaces built to stay coherent as products grow.",
       },
     ],
+    featuredProject: {
+      client: "Regional Government of Cusco",
+      title: "SIGI-PRE · Modernizing investment management",
+      description:
+        "An initiative for the Regional Government of Cusco to modernize public management by improving internal processes. I designed SIGI-PRE to give regional investments efficient visibility and control, from sign-in to internal review flows.",
+      url: "#projects",
+    },
+    projects: [
+      {
+        client: "Regional Government of Cusco",
+        title: "SIGI-PRE · Investment management",
+        description:
+          "A system that gives the Regional Government of Cusco visibility and control over regional investments.",
+        url: "#projects",
+      },
+      {
+        client: "Regional Government of Cusco",
+        title: "SIGI-PRE · Investment management",
+        description:
+          "A system that gives the Regional Government of Cusco visibility and control over regional investments.",
+        url: "#projects",
+      },
+    ],
     labels: {
       home: "Home",
       selectedWork: "Selected work",
@@ -85,6 +129,11 @@ export const homepages: Record<Locale, Homepage> = {
       viewSelectedWork: "View selected work",
       yearsExperience: "Years of experience",
       projects: "Projects",
+      featuredProjects: "Selected projects",
+      caseStudies: "Case studies",
+      caseStudiesTitle: "From research to the final product",
+      viewMore: "View more",
+      viewCaseStudy: "View case study",
       profileDetails: "Profile details",
       downloadCv: "Download CV",
       portraitAlt: "Portrait of Yanela Alvarez",
@@ -119,6 +168,29 @@ export const homepages: Record<Locale, Homepage> = {
           "Interfaces expresivas y accesibles que mantienen su coherencia al crecer.",
       },
     ],
+    featuredProject: {
+      client: "Gobierno Regional del Cusco",
+      title: "SIGI-PRE · Modernización de la gestión de inversiones",
+      description:
+        "Iniciativa del Gobierno Regional del Cusco para modernizar la gestión pública mediante la optimización de procesos internos. Diseñé el sistema SIGI-PRE para dar seguimiento y control eficiente a las inversiones regionales, desde el inicio de sesión hasta los flujos internos de revisión.",
+      url: "#projects",
+    },
+    projects: [
+      {
+        client: "Gobierno Regional del Cusco",
+        title: "SIGI-PRE · Gestión de inversiones",
+        description:
+          "Sistema para el Gobierno Regional del Cusco que da seguimiento y control a las inversiones regionales.",
+        url: "#projects",
+      },
+      {
+        client: "Gobierno Regional del Cusco",
+        title: "SIGI-PRE · Gestión de inversiones",
+        description:
+          "Sistema para el Gobierno Regional del Cusco que da seguimiento y control a las inversiones regionales.",
+        url: "#projects",
+      },
+    ],
     labels: {
       home: "Inicio",
       selectedWork: "Trabajo seleccionado",
@@ -129,6 +201,11 @@ export const homepages: Record<Locale, Homepage> = {
       viewSelectedWork: "Ver trabajo seleccionado",
       yearsExperience: "Años de experiencia",
       projects: "Proyectos",
+      featuredProjects: "Trabajos Seleccionados",
+      caseStudies: "Casos de estudio",
+      caseStudiesTitle: "De la investigación al producto final",
+      viewMore: "Ver más",
+      viewCaseStudy: "Ver caso completo",
       profileDetails: "Detalles del perfil",
       downloadCv: "Descargar CV",
       portraitAlt: "Retrato de Yanela Alvarez",

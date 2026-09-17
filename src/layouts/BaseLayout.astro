@@ -35,14 +35,31 @@ const { title, description, lang = "en" } = Astro.props;
 <style is:global>
   :root {
     color-scheme: light;
-    --ink: #283d38;
-    --paper: #f7f4ee;
-    --white: #fff;
-    --lavender: #737da8;
-    --lavender-soft: #e2e4ee;
-    --purple: #9876cf;
-    --mint: #d4e9df;
-    --sand: #f4dca8;
+    /* Core interface */
+    --background: #fbf9f3;
+    --headline: #6f779d;
+    --subheadline: #15161c;
+    --button-background: #d9dbe5;
+    --button-text: #6f779d;
+
+    /* Illustration */
+    --illustration-stroke: #fbf9f3;
+    --illustration-main: #ffffff;
+    --illustration-secondary: #6f779d;
+    --illustration-tertiary: #d9dbe5;
+    --highlight-purple: #9b7ac9;
+    --highlight-green: #1e5b47;
+    --highlight-yellow: #f1cb8c;
+
+    /* Semantic aliases used by the site */
+    --ink: var(--subheadline);
+    --paper: var(--background);
+    --white: var(--illustration-main);
+    --lavender: var(--headline);
+    --lavender-soft: var(--illustration-tertiary);
+    --purple: var(--highlight-purple);
+    --mint: var(--highlight-green);
+    --sand: var(--highlight-yellow);
     --radius: 28px;
   }
 
@@ -62,6 +79,21 @@ const { title, description, lang = "en" } = Astro.props;
     color: inherit;
     text-decoration: none;
   }
+  .section-eyebrow {
+    margin: 0 0 8px;
+    color: var(--subheadline);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+  .section-title {
+    margin: 0;
+    color: var(--headline);
+    font: 800 clamp(2rem, 4vw, 3rem)/1.1 "Manrope", sans-serif;
+    letter-spacing: -0.04em;
+  }
 
   .site-shell {
     display: grid;
@@ -79,8 +111,8 @@ const { title, description, lang = "en" } = Astro.props;
     align-items: center;
     justify-content: space-between;
     padding: 30px 12px;
-    border-right: 1px solid #e6e3dc;
-    background: rgba(255, 255, 255, 0.88);
+    border-right: 1px solid var(--illustration-tertiary);
+    background: rgb(255 255 255 / 88%);
     backdrop-filter: blur(18px);
   }
 
@@ -117,10 +149,10 @@ const { title, description, lang = "en" } = Astro.props;
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 4px;
-    border: 1px solid #dedbe3;
+    border: 1px solid var(--illustration-tertiary);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.88);
-    box-shadow: 0 8px 24px #4e496018;
+    background: rgb(255 255 255 / 88%);
+    box-shadow: 0 8px 24px rgb(111 119 157 / 9%);
     backdrop-filter: blur(16px);
     isolation: isolate;
     cursor: pointer;
@@ -147,7 +179,7 @@ const { title, description, lang = "en" } = Astro.props;
     height: 30px;
     background: var(--lavender);
     border-radius: 999px;
-    box-shadow: 0 4px 12px #50597d38;
+    box-shadow: 0 4px 12px rgb(111 119 157 / 22%);
     transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
   }
   .language-toggle[data-locale="es"] .toggle-thumb {
@@ -162,7 +194,7 @@ const { title, description, lang = "en" } = Astro.props;
     outline-offset: 2px;
   }
   .language-toggle:hover .toggle-thumb {
-    box-shadow: 0 5px 16px #50597d52;
+    box-shadow: 0 5px 16px rgb(111 119 157 / 32%);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -175,7 +207,7 @@ const { title, description, lang = "en" } = Astro.props;
   .side-rail nav a:focus-visible,
   .side-rail nav a.active {
     background: var(--lavender-soft);
-    color: #58638e;
+    color: var(--button-text);
     outline: none;
   }
 
@@ -204,8 +236,8 @@ const { title, description, lang = "en" } = Astro.props;
     overflow: hidden;
     padding: 24px 24px 0;
     border-radius: var(--radius);
-    background-color: #d9dbe5;
-    color: #606b97;
+    background-color: var(--button-background);
+    color: var(--button-text);
   }
   .availability {
     align-self: flex-start;
@@ -288,15 +320,19 @@ const { title, description, lang = "en" } = Astro.props;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    border: 1px solid #e7c77d;
+    border: 1px solid var(--highlight-yellow);
     border-radius: var(--radius);
-    background: radial-gradient(circle at 40% 20%, #fff3d7, var(--sand));
+    background: radial-gradient(
+      circle at 40% 20%,
+      var(--illustration-main),
+      var(--sand)
+    );
   }
   .project-kicker {
     position: absolute;
     top: 24px;
     left: 28px;
-    color: #7d6848;
+    color: var(--subheadline);
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -311,16 +347,16 @@ const { title, description, lang = "en" } = Astro.props;
     height: 38px;
     place-items: center;
     border-radius: 50%;
-    background: white;
-    box-shadow: 0 8px 20px #7c63352a;
+    background: var(--illustration-main);
+    box-shadow: 0 8px 20px rgb(21 22 28 / 16%);
   }
   .project-window {
     width: min(72%, 390px);
     overflow: hidden;
-    border: 1px solid #d9d8df;
+    border: 1px solid var(--illustration-tertiary);
     border-radius: 13px;
-    background: white;
-    box-shadow: 0 22px 28px #69572d38;
+    background: var(--illustration-main);
+    box-shadow: 0 22px 28px rgb(21 22 28 / 22%);
     transform: translateY(18px);
   }
   .window-bar {
@@ -329,21 +365,25 @@ const { title, description, lang = "en" } = Astro.props;
     align-items: center;
     gap: 5px;
     padding: 0 12px;
-    background: #f5f4f7;
+    background: var(--background);
   }
   .window-bar i {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #d5d4d9;
+    background: var(--illustration-tertiary);
   }
   .window-body {
     display: grid;
     min-height: 128px;
     align-content: center;
     padding: 24px;
-    background: linear-gradient(90deg, #74798e 48%, #f4f2f6 48%);
-    color: white;
+    background: linear-gradient(
+      90deg,
+      var(--illustration-secondary) 48%,
+      var(--background) 48%
+    );
+    color: var(--illustration-main);
   }
   .window-body span {
     display: block;
@@ -351,7 +391,7 @@ const { title, description, lang = "en" } = Astro.props;
     height: 8px;
     margin-top: 10px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.45);
+    background: rgb(255 255 255 / 45%);
   }
 
   .metrics {
@@ -376,11 +416,11 @@ const { title, description, lang = "en" } = Astro.props;
   }
   .experience {
     background: var(--mint);
-    color: #316451;
+    color: var(--illustration-main);
   }
   .projects {
     background: var(--lavender);
-    color: white;
+    color: var(--illustration-main);
   }
   .service-strip {
     display: flex;
@@ -390,10 +430,10 @@ const { title, description, lang = "en" } = Astro.props;
   }
   .service-strip span {
     padding: 9px 13px;
-    border: 1px solid #dedbe3;
+    border: 1px solid var(--illustration-tertiary);
     border-radius: 999px;
-    background: white;
-    color: #677096;
+    background: var(--illustration-main);
+    color: var(--subheadline);
     font-size: 0.75rem;
     font-weight: 600;
   }
@@ -408,7 +448,7 @@ const { title, description, lang = "en" } = Astro.props;
     padding: 32px;
     border-radius: var(--radius);
     background: var(--lavender);
-    color: white;
+    color: var(--illustration-main);
   }
   .role-card h2 {
     margin: 0 0 8px;
@@ -435,14 +475,14 @@ const { title, description, lang = "en" } = Astro.props;
     min-height: 65px;
     padding: 16px;
     border-radius: 999px;
-    background: #e8e2ec;
-    color: #8b70bc;
+    background: var(--illustration-tertiary);
+    color: var(--highlight-purple);
     font-weight: 700;
     text-align: center;
   }
   .quick-links a {
-    background: #dfe2ec;
-    color: #69749d;
+    background: var(--button-background);
+    color: var(--button-text);
   }
 
   @media (max-width: 920px) {
@@ -476,9 +516,9 @@ const { title, description, lang = "en" } = Astro.props;
       height: 62px;
       flex-direction: row;
       padding: 9px 12px;
-      border: 1px solid #dedbe3;
+      border: 1px solid var(--illustration-tertiary);
       border-radius: 20px;
-      box-shadow: 0 14px 38px #4e49602e;
+      box-shadow: 0 14px 38px rgb(111 119 157 / 18%);
     }
     .side-rail nav {
       flex-direction: row;

@@ -1,0 +1,155 @@
+---
+import type { Project } from "../../../content/homepage";
+
+interface Props {
+  project: Project;
+  viewCaseStudy: string;
+}
+
+const { project, viewCaseStudy } = Astro.props;
+---
+
+<article class="featured-study-case">
+  <div class="project-preview" aria-hidden="true">
+    <div class="project-window">
+      <div class="project-window__panel">
+        <span>Gore Cusco</span>
+        <strong>SIGI – PRE</strong>
+      </div>
+      <div class="project-window__form">
+        <span>Usuario</span>
+        <i></i>
+        <span>Contraseña</span>
+        <i></i>
+        <b></b>
+      </div>
+    </div>
+  </div>
+  <div class="featured-project__content">
+    <span class="project-client">{project.client}</span>
+    <h3>{project.title}</h3>
+    <p>{project.description}</p>
+    <a href={project.url}>
+      {viewCaseStudy} <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+<style>
+  .featured-study-case {
+    display: grid;
+    min-height: 475px;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    border-radius: 34px;
+    background: var(--illustration-main);
+  }
+  .project-preview {
+    display: grid;
+    place-items: center;
+    padding: 44px;
+    background: var(--illustration-tertiary);
+  }
+  .project-window {
+    display: grid;
+    width: min(100%, 605px);
+    grid-template-columns: 1fr 1.14fr;
+    overflow: hidden;
+    border-radius: 18px;
+    background: var(--illustration-main);
+    box-shadow: 0 24px 26px rgb(21 22 28 / 25%);
+  }
+  .project-window__panel,
+  .project-window__form {
+    display: grid;
+    align-content: center;
+    gap: 13px;
+    min-height: 226px;
+    padding: 28px;
+  }
+  .project-window__panel {
+    background: var(--illustration-tertiary);
+    color: var(--illustration-main);
+  }
+  .project-window__panel span,
+  .project-window__form span {
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .project-window__panel strong {
+    font-size: 1rem;
+  }
+  .project-window__form {
+    gap: 8px;
+    color: var(--illustration-tertiary);
+  }
+  .project-window__form i,
+  .project-window__form b {
+    display: block;
+    height: 16px;
+    border-radius: 4px;
+    background: var(--background);
+  }
+  .project-window__form b {
+    height: 20px;
+    margin-top: 7px;
+    background: var(--illustration-tertiary);
+  }
+  .featured-project__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: clamp(36px, 5vw, 74px);
+  }
+  .project-client {
+    display: inline-block;
+    margin-bottom: 32px;
+    padding: 8px 14px;
+    border: 1px solid var(--headline);
+    border-radius: 999px;
+    color: var(--headline);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.72rem;
+  }
+  h3 {
+    margin: 0;
+    color: var(--subheadline);
+    font-size: clamp(1.4rem, 2.2vw, 2rem);
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+  p {
+    max-width: 55ch;
+    margin: 28px 0 30px;
+    color: color-mix(in srgb, var(--subheadline) 55%, var(--illustration-main));
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  a {
+    color: color-mix(in srgb, var(--subheadline) 65%, var(--illustration-main));
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.85rem;
+  }
+  a span {
+    margin-left: 8px;
+    font-size: 1.2rem;
+  }
+  @media (max-width: 760px) {
+    .featured-study-case {
+      grid-template-columns: 1fr;
+    }
+    .project-preview {
+      min-height: 300px;
+      padding: 28px;
+    }
+    .project-window__panel,
+    .project-window__form {
+      min-height: 170px;
+      padding: 20px;
+    }
+  }
+</style>

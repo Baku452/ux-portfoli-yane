@@ -1,5 +1,5 @@
 ---
-import type { Homepage } from "../content/homepage";
+import type { Homepage } from "../../content/homepage";
 
 interface Props {
   page: Homepage;
@@ -8,7 +8,12 @@ interface Props {
 const { page } = Astro.props;
 ---
 
-<section class="masthead" aria-labelledby="hero-title">
+<section
+  data-nav-section
+  class="masthead"
+  aria-labelledby="hero-title"
+  id="top"
+>
   <p>
     {page.availability.split("·").at(-1)?.trim() ?? new Date().getFullYear()}
   </p>

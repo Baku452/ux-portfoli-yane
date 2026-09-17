@@ -1,0 +1,89 @@
+---
+import type { Homepage } from "../../../content/homepage";
+import FeaturedStudyCase from "./FeaturedStudyCase.astro";
+import StudyCaseList from "./StudyCaseList.astro";
+
+interface Props {
+  page: Homepage;
+}
+
+const { page } = Astro.props;
+---
+
+<section
+  data-nav-section
+  class="study-case-section"
+  id="study-cases"
+  aria-labelledby="study-cases-title"
+>
+  <header class="study-case-header">
+    <div>
+      <p class="section-eyebrow">{page.labels.caseStudies}</p>
+      <h2 class="section-title" id="study-cases-title">
+        {page.labels.caseStudiesTitle}
+      </h2>
+    </div>
+    <a class="study-case-more" href="#study-cases">
+      {page.labels.viewMore} <span aria-hidden="true">→</span>
+    </a>
+  </header>
+
+  <div class="study-case-content">
+    <FeaturedStudyCase
+      project={page.featuredProject}
+      viewCaseStudy={page.labels.viewCaseStudy}
+    />
+    <StudyCaseList studyCases={page.projects} />
+  </div>
+</section>
+
+<style>
+  .study-case-section {
+    width: min(1180px, calc(100% - 64px));
+    margin: 0 auto;
+    padding: 20px 0 90px;
+  }
+  .study-case-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 42px;
+  }
+  .study-case-header .section-eyebrow {
+    max-width: 7ch;
+  }
+  .study-case-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 30px;
+    border-radius: 999px;
+    background: var(--button-background);
+    color: var(--button-text);
+    font-size: 0.9rem;
+    font-weight: 800;
+  }
+  .study-case-more span {
+    font-size: 1.3rem;
+    line-height: 0.8;
+  }
+  .study-case-content {
+    display: grid;
+    gap: 24px;
+  }
+  @media (max-width: 650px) {
+    .study-case-section {
+      width: calc(100% - 28px);
+      padding: 8px 0 100px;
+    }
+    .study-case-header {
+      align-items: flex-end;
+      margin-bottom: 28px;
+    }
+    .study-case-more {
+      padding: 12px 18px;
+      font-size: 0.8rem;
+    }
+  }
+</style>

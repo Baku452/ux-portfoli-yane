@@ -1,0 +1,89 @@
+---
+import type { Homepage } from "../../../content/homepage";
+import FeaturedProject from "./FeaturedProject.astro";
+import ProjectList from "./ProjectList.astro";
+
+interface Props {
+  page: Homepage;
+}
+
+const { page } = Astro.props;
+---
+
+<section
+  data-nav-section
+  class="projects-section"
+  id="projects"
+  aria-labelledby="projects-title"
+>
+  <header class="projects-header">
+    <div>
+      <p class="section-eyebrow">{page.labels.projects}</p>
+      <h2 class="section-title" id="projects-title">
+        {page.labels.featuredProjects}
+      </h2>
+    </div>
+    <a class="projects-more" href="#projects">
+      {page.labels.viewMore} <span aria-hidden="true">→</span>
+    </a>
+  </header>
+
+  <div class="projects-content">
+    <FeaturedProject
+      project={page.featuredProject}
+      viewCaseStudy={page.labels.viewCaseStudy}
+    />
+    <ProjectList projects={page.projects} />
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    width: min(1180px, calc(100% - 64px));
+    margin: 0 auto;
+    padding: 20px 0 90px;
+  }
+  .projects-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 42px;
+  }
+  .projects-header .section-eyebrow {
+    max-width: 7ch;
+  }
+  .projects-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 30px;
+    border-radius: 999px;
+    background: var(--button-background);
+    color: var(--button-text);
+    font-size: 0.9rem;
+    font-weight: 800;
+  }
+  .projects-more span {
+    font-size: 1.3rem;
+    line-height: 0.8;
+  }
+  .projects-content {
+    display: grid;
+    gap: 24px;
+  }
+  @media (max-width: 650px) {
+    .projects-section {
+      width: calc(100% - 28px);
+      padding: 8px 0 100px;
+    }
+    .projects-header {
+      align-items: flex-end;
+      margin-bottom: 28px;
+    }
+    .projects-more {
+      padding: 12px 18px;
+      font-size: 0.8rem;
+    }
+  }
+</style>

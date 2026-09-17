@@ -1,0 +1,30 @@
+---
+import type { StudyCase } from "../../../content/homepage";
+import StudyCaseCard from "./StudyCaseCard.astro";
+
+interface Props {
+  studyCases: StudyCase[];
+}
+
+const { studyCases } = Astro.props;
+---
+
+<div class="study-case-list">
+  {studyCases.map((studyCase) => (
+    <StudyCaseCard studyCase={studyCase} />
+  ))}
+</div>
+
+<style>
+  .study-case-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  @media (max-width: 650px) {
+    .study-case-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
