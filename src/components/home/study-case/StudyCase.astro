@@ -30,10 +30,10 @@ const { page } = Astro.props;
 
   <div class="study-case-content">
     <FeaturedStudyCase
-      project={page.featuredProject}
+      studyCase={page.featuredStudyCase}
       viewCaseStudy={page.labels.viewCaseStudy}
     />
-    <StudyCaseList studyCases={page.projects} />
+    <StudyCaseList studyCases={page.studyCases} />
   </div>
 </section>
 
@@ -50,9 +50,7 @@ const { page } = Astro.props;
     gap: 24px;
     margin-bottom: 42px;
   }
-  .study-case-header .section-eyebrow {
-    max-width: 7ch;
-  }
+
   .study-case-more {
     display: inline-flex;
     align-items: center;

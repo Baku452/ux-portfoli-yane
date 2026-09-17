@@ -55,6 +55,8 @@ export interface Homepage {
   projectCount: string;
   featuredProject: Project;
   projects: Project[];
+  featuredStudyCase: StudyCase;
+  studyCases: StudyCase[];
   resumeUrl: string;
   labels: Labels;
 }
@@ -117,6 +119,22 @@ export const homepages: Record<Locale, Homepage> = {
         description:
           "A system that gives the Regional Government of Cusco visibility and control over regional investments.",
         url: "#projects",
+      },
+    ],
+    featuredStudyCase: {
+      client: "Regional Government of Cusco",
+      title: "SIGI-PRE · Modernizing investment management",
+      description:
+        "A case study on simplifying the internal review process for regional investments, from sign-in and permissions to decision-ready tracking.",
+      url: "#study-cases",
+    },
+    studyCases: [
+      {
+        client: "Regional Government of Cusco",
+        title: "SIGI-PRE · Access and onboarding",
+        description:
+          "How the sign-in experience and initial setup were made clearer for public-sector teams.",
+        url: "#study-cases",
       },
     ],
     labels: {
@@ -189,6 +207,22 @@ export const homepages: Record<Locale, Homepage> = {
         description:
           "Sistema para el Gobierno Regional del Cusco que da seguimiento y control a las inversiones regionales.",
         url: "#projects",
+      },
+    ],
+    featuredStudyCase: {
+      client: "Gobierno Regional del Cusco",
+      title: "SIGI-PRE · Modernización de la gestión de inversiones",
+      description:
+        "Caso de estudio sobre la simplificación del proceso interno de revisión de inversiones regionales, desde el acceso y los permisos hasta el seguimiento para la toma de decisiones.",
+      url: "#study-cases",
+    },
+    studyCases: [
+      {
+        client: "Gobierno Regional del Cusco",
+        title: "SIGI-PRE · Acceso e incorporación",
+        description:
+          "Cómo se hizo más claro el inicio de sesión y la configuración inicial para equipos del sector público.",
+        url: "#study-cases",
       },
     ],
     labels: {
