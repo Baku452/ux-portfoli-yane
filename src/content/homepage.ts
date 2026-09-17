@@ -30,6 +30,14 @@ export interface AboutMeContent {
   skills: string[];
 }
 
+export interface ContactContent {
+  eyebrow: string;
+  title: string;
+  description: string;
+  linkedIn: string;
+  behance: string;
+}
+
 export interface Labels {
   home: string;
   selectedWork: string;
@@ -70,6 +78,7 @@ export interface Homepage {
   studyCases: StudyCase[];
   resumeUrl: string;
   aboutMe: AboutMeContent;
+  contact: ContactContent;
   labels: Labels;
 }
 
@@ -203,6 +212,14 @@ export const homepages: Record<Locale, Homepage> = {
         "HTML/CSS",
         "Scrum",
       ],
+    },
+    contact: {
+      eyebrow: "Contact",
+      title: "Start a conversation",
+      description:
+        "Always open to conversations about design, technology, and new opportunities.",
+      linkedIn: "/in/yanela-alvarez",
+      behance: "/yanelaalvarez",
     },
     labels: {
       home: "Home",
@@ -347,6 +364,14 @@ export const homepages: Record<Locale, Homepage> = {
         "HTML/CSS",
         "SCRUM",
       ],
+    },
+    contact: {
+      eyebrow: "Contacto",
+      title: "Inicia la conversación",
+      description:
+        "Siempre abierta a conversar sobre diseño, tecnología y nuevas oportunidades.",
+      linkedIn: "/in/yanela-alvarez",
+      behance: "/yanelaalvarez",
     },
     labels: {
       home: "Inicio",

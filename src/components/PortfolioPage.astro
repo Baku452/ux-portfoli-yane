@@ -1,6 +1,7 @@
 ---
 import About from "./home/About.astro";
 import AboutMe from "./home/about-me/AboutMe.astro";
+import Contact from "./home/Contact.astro";
 import Footer from "./home/Footer.astro";
 import Hero from "./home/Hero.astro";
 import Projects from "./home/projects/Projects.astro";
@@ -24,7 +25,7 @@ const { page } = Astro.props;
   lang={page.locale}
 >
   <div class="site-shell" id="top">
-    <NavBar email={page.email} labels={page.labels} />
+    <NavBar labels={page.labels} />
     <LanguageSwitch locale={page.locale} label={page.labels.languageSwitch} />
     <main>
       <div class="portfolio-grid">
@@ -49,6 +50,7 @@ const { page } = Astro.props;
       <Projects page={page} />
       <StudyCase page={page} />
       <AboutMe page={page} />
+      <Contact page={page} />
     </main>
   </div>
 </BaseLayout>

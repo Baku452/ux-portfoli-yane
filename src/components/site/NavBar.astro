@@ -3,11 +3,10 @@ import { Icon } from "astro-icon/components";
 import type { Labels } from "../../content/homepage";
 
 interface Props {
-  email: string;
   labels: Labels;
 }
 
-const { email, labels } = Astro.props;
+const { labels } = Astro.props;
 ---
 
 <aside class="side-rail">
@@ -27,11 +26,11 @@ const { email, labels } = Astro.props;
     <a href="#about-me" aria-label={labels.about}>
       <Icon name="hugeicons:user" size={20} />
     </a>
-    <a href={`mailto:${email}`} aria-label={labels.email}>
+    <a href="#contact" aria-label={labels.email}>
       <Icon name="hugeicons:mail-01" size={20} />
     </a>
   </nav>
-  <a class="rail-mail" href={`mailto:${email}`} aria-label={labels.email}>
+  <a class="rail-mail" href="#contact" aria-label={labels.email}>
     <Icon name="hugeicons:mail-01" size={19} />
   </a>
 </aside>
