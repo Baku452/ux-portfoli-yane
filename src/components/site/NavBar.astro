@@ -21,8 +21,11 @@ const { email, labels } = Astro.props;
     <a href="#projects" aria-label={labels.selectedWork}>
       <Icon name="hugeicons:grid-view" size={20} />
     </a>
-    <a href="#study-cases" aria-label={labels.about}>
+    <a href="#study-cases" aria-label={labels.caseStudies}>
       <Icon name="hugeicons:file-01" size={20} />
+    </a>
+    <a href="#about-me" aria-label={labels.about}>
+      <Icon name="hugeicons:user" size={20} />
     </a>
     <a href={`mailto:${email}`} aria-label={labels.email}>
       <Icon name="hugeicons:mail-01" size={20} />

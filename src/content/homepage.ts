@@ -19,6 +19,17 @@ export interface StudyCase {
   url: string;
 }
 
+export interface AboutMeContent {
+  eyebrow: string;
+  title: string;
+  paragraphs: string[];
+  experienceTitle: string;
+  skillsTitle: string;
+  facts: { label: string; value: string }[];
+  experience: { period: string; role: string; organization: string }[];
+  skills: string[];
+}
+
 export interface Labels {
   home: string;
   selectedWork: string;
@@ -58,6 +69,7 @@ export interface Homepage {
   featuredStudyCase: StudyCase;
   studyCases: StudyCase[];
   resumeUrl: string;
+  aboutMe: AboutMeContent;
   labels: Labels;
 }
 
@@ -66,7 +78,7 @@ const shared = {
   email: "hello@example.com",
   experienceStartYear: 2024,
   projectCount: "03",
-  resumeUrl: "/resume.pdf",
+  resumeUrl: "/Yanela_Alvarez_UX_Designer_Resume.pdf",
 };
 
 export const homepages: Record<Locale, Homepage> = {
@@ -137,6 +149,61 @@ export const homepages: Record<Locale, Homepage> = {
         url: "#study-cases",
       },
     ],
+    aboutMe: {
+      eyebrow: "About me",
+      title: "My professional journey",
+      paragraphs: [
+        "My journey began in Systems Engineering, where I learned about logic, structure, and problem-solving. Over time, I discovered a special interest in designing digital experiences and began specializing in UX/UI design.",
+        "My technical background became one of my greatest strengths: a bridge between analytical engineering thinking and the creativity of design. Today I turn business processes and needs into functional, intuitive digital interfaces that make people's lives easier.",
+      ],
+      experienceTitle: "Experience",
+      skillsTitle: "Skills",
+      facts: [
+        { label: "Profession", value: "Systems Engineer · UAC" },
+        { label: "Specialization", value: "UX/UI Design · Toulouse Lautrec" },
+        {
+          label: "Languages",
+          value: "Spanish (native) · English · Portuguese",
+        },
+      ],
+      experience: [
+        {
+          period: "2025 · Present",
+          role: "UX/UI Designer",
+          organization: "CUSCO REGIONAL GOVERNMENT",
+        },
+        { period: "2024 · 25", role: "Programmer", organization: "CAJA CUSCO" },
+        {
+          period: "2022 · 23",
+          role: "UX/UI Designer",
+          organization: "QOSOQMPOSTA",
+        },
+        {
+          period: "2021 · 22",
+          role: "Programmer",
+          organization: "VALENCIA TRAVEL",
+        },
+        {
+          period: "2020 · Present",
+          role: "Design & Development",
+          organization: "FREELANCE",
+        },
+      ],
+      skills: [
+        "Figma",
+        "Systems design",
+        "User research",
+        "Wireframing",
+        "Prototyping",
+        "Project management",
+        "Accessibility",
+        "Teamwork",
+        "Communication",
+        "Planning",
+        "HTML/CSS",
+        "Scrum",
+      ],
+    },
     labels: {
       home: "Home",
       selectedWork: "Selected work",
@@ -153,7 +220,7 @@ export const homepages: Record<Locale, Homepage> = {
       viewMore: "View more",
       viewCaseStudy: "View case study",
       profileDetails: "Profile details",
-      downloadCv: "Download CV",
+      downloadCv: "Download Resume",
       portraitAlt: "Portrait of Yanela Alvarez",
       languageSwitch: "Cambiar a español",
     },
@@ -225,6 +292,62 @@ export const homepages: Record<Locale, Homepage> = {
         url: "#study-cases",
       },
     ],
+    aboutMe: {
+      eyebrow: "Sobre mí",
+      title: "Mi desarrollo profesional",
+      paragraphs: [
+        "Mi camino comenzó en la Ingeniería de Sistemas, donde aprendí sobre la lógica, la estructura y la resolución de problemas. Con el tiempo, descubrí un especial interés por el diseño de experiencias digitales y comencé a especializarme en UX/UI Design.",
+        "Mi base tecnológica no se quedaba atrás, sino que se convertía en mi mayor fortaleza: el puente perfecto entre el pensamiento analítico de la ingeniería y la creatividad del diseño. Hoy me dedico a transformar procesos y necesidades de negocio en interfaces digitales funcionales e intuitivas que realmente facilitan la vida de los usuarios.",
+      ],
+      experienceTitle: "Experiencia",
+      skillsTitle: "Habilidades",
+      facts: [
+        { label: "Profesión", value: "Ingeniera de Sistemas · UAC" },
+        { label: "Especialidad", value: "Diseño UX/UI · Toulouse Lautrec" },
+        { label: "Idiomas", value: "Español (nativo) · Inglés · Portugués" },
+      ],
+      experience: [
+        {
+          period: "2025 · actualidad",
+          role: "Diseñadora UX/UI",
+          organization: "GOBIERNO REGIONAL CUSCO",
+        },
+        {
+          period: "2024 · 25",
+          role: "Programadora",
+          organization: "CAJA CUSCO",
+        },
+        {
+          period: "2022 · 23",
+          role: "Diseñadora UX/UI",
+          organization: "QOSOQMPOSTA",
+        },
+        {
+          period: "2021 · 22",
+          role: "Programadora",
+          organization: "VALENCIA TRAVEL",
+        },
+        {
+          period: "2020 · actualidad",
+          role: "Diseño y Programación",
+          organization: "FREELANCE",
+        },
+      ],
+      skills: [
+        "Figma",
+        "Diseño de sistemas",
+        "Investigación de usuarios",
+        "Wireframing",
+        "Prototipado",
+        "Gestión de proyectos",
+        "Accesibilidad",
+        "Trabajo en equipo",
+        "Comunicación",
+        "Planificación",
+        "HTML/CSS",
+        "SCRUM",
+      ],
+    },
     labels: {
       home: "Inicio",
       selectedWork: "Trabajo seleccionado",
