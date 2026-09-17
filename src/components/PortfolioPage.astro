@@ -27,7 +27,7 @@ const { page } = Astro.props;
   <div class="site-shell" id="top">
     <NavBar labels={page.labels} />
     <LanguageSwitch locale={page.locale} label={page.labels.languageSwitch} />
-    <main>
+    <main class="content-layout">
       <div class="portfolio-grid">
         <About page={page} />
         <div class="dashboard">

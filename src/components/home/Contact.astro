@@ -22,38 +22,44 @@ const contactRows = [
 >
   <div class="contact-copy">
     <p class="section-eyebrow">{page.contact.eyebrow}</p>
-    <h2 class="section-title" id="contact-title">{page.contact.title}</h2>
+    <h2 class="section-title" id="contact-title">
+      {page.contact.title}
+    </h2>
     <p class="contact-description">{page.contact.description}</p>
 
     <dl class="contact-links">
       {contactRows.map((row) => (
         <div>
           <dt>{row.label}</dt>
-          <dd><a href={row.href}>{row.value}</a></dd>
+          <dd>
+            <a href={row.href}>{row.value}</a>
+          </dd>
         </div>
       ))}
     </dl>
   </div>
-
-  <img
-    class="contact-portrait"
-    src={contactPortrait.src}
-    width={contactPortrait.width}
-    height={contactPortrait.height}
-    alt={page.labels.portraitAlt}
-  />
+  <div class="contact-portrait-container">
+    <img
+      class="contact-portrait"
+      src={contactPortrait.src}
+      width={contactPortrait.width}
+      height={contactPortrait.height}
+      alt={page.labels.portraitAlt}
+    />
+  </div>
 </section>
 
 <style>
   .contact-section {
     display: grid;
-    width: min(1180px, calc(100% - 64px));
+    width: 100%;
     grid-template-columns: minmax(0, 1fr) minmax(280px, 370px);
     align-items: center;
     gap: clamp(40px, 7vw, 110px);
-    margin: 0 auto;
+    margin: 0;
     padding: clamp(44px, 6vw, 76px);
-    border: 1px solid color-mix(in srgb, var(--featured-pill-border) 16%, transparent);
+    border: 1px solid
+      color-mix(in srgb, var(--featured-pill-border) 16%, transparent);
     border-radius: 34px;
     background: var(--contact-gradient);
     scroll-margin-top: 24px;
@@ -65,19 +71,20 @@ const contactRows = [
     margin-bottom: 20px;
   }
   .contact-copy .section-title {
-    margin-bottom: 24px;
+    margin-bottom: 14px;
   }
   .contact-description {
     max-width: 60ch;
     margin: 0;
     color: color-mix(in srgb, var(--headline) 60%, var(--illustration-main));
-    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    font-size: 14.5px;
     line-height: 1.5;
   }
   .contact-links {
     display: grid;
     gap: 0;
     margin: clamp(36px, 5vw, 74px) 0 0;
+    font-size: 13px;
   }
   .contact-links div {
     display: flex;
@@ -85,10 +92,12 @@ const contactRows = [
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    border-top: 1px solid color-mix(in srgb, var(--featured-pill-border) 20%, transparent);
+    border-top: 1px solid
+      color-mix(in srgb, var(--featured-pill-border) 20%, transparent);
   }
   .contact-links div:last-child {
-    border-bottom: 1px solid color-mix(in srgb, var(--featured-pill-border) 20%, transparent);
+    border-bottom: 1px solid
+      color-mix(in srgb, var(--featured-pill-border) 20%, transparent);
   }
   .contact-links dt,
   .contact-links dd {
@@ -106,16 +115,22 @@ const contactRows = [
     text-decoration: underline;
     text-underline-offset: 4px;
   }
+  .contact-portrait-container {
+    width: 100%;
+    max-width: 370px;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 28px;
+  }
   .contact-portrait {
     width: 100%;
-    aspect-ratio: 1;
+    height: 100%;
     object-fit: cover;
-    border-radius: 28px;
     filter: grayscale(1);
   }
   @media (max-width: 760px) {
     .contact-section {
-      width: calc(100% - 28px);
+      width: 100%;
       grid-template-columns: 1fr;
       gap: 32px;
       padding: 32px 28px;

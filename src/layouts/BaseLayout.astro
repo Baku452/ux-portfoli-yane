@@ -69,6 +69,7 @@ const { title, description, lang = "en" } = Astro.props;
     --card-pill-background: #ece6ec;
     --card-pill-border: #9b7ac9;
     --contact-gradient: linear-gradient(135deg, #d6d8e3 0%, #edeef2 100%);
+    --content-gutter: 250px;
 
     /* Semantic aliases used by the site */
     --ink: var(--subheadline);
@@ -109,7 +110,7 @@ const { title, description, lang = "en" } = Astro.props;
   .section-eyebrow {
     margin: 0 0 8px;
     color: var(--subheadline);
-    font-size: 0.8rem;
+    font-size: 12px;
     letter-spacing: 1.15px;
     line-height: 1.05;
     text-transform: uppercase;
@@ -117,18 +118,21 @@ const { title, description, lang = "en" } = Astro.props;
   .section-title {
     margin: 0;
     color: var(--headline);
-    font: 800 clamp(2rem, 4vw, 3rem)/1.1 var(--font-heading);
+    font: 800 36px/1.1 var(--font-heading);
   }
 
   .site-shell {
-    display: grid;
     min-height: 100vh;
-    grid-template-columns: 76px minmax(0, 1fr);
+  }
+  .content-layout {
+    width: calc(100% - (var(--content-gutter) * 2));
+    margin: 0 auto;
   }
 
   .side-rail {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
     z-index: 20;
     display: flex;
     height: 100vh;
@@ -238,7 +242,7 @@ const { title, description, lang = "en" } = Astro.props;
 
   .portfolio-grid {
     display: grid;
-    width: min(1180px, calc(100% - 64px));
+    width: 100%;
     margin: auto;
     padding: 52px 0;
     grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
@@ -500,8 +504,11 @@ const { title, description, lang = "en" } = Astro.props;
   }
 
   @media (max-width: 920px) {
+    :root {
+      --content-gutter: 20px;
+    }
     .portfolio-grid {
-      width: min(680px, calc(100% - 40px));
+      width: min(680px, 100%);
       grid-template-columns: 1fr;
     }
     .profile-card {
@@ -516,6 +523,9 @@ const { title, description, lang = "en" } = Astro.props;
   }
 
   @media (max-width: 650px) {
+    :root {
+      --content-gutter: 14px;
+    }
     .site-shell {
       display: block;
       padding-bottom: 78px;
@@ -545,7 +555,7 @@ const { title, description, lang = "en" } = Astro.props;
       right: 14px;
     }
     .portfolio-grid {
-      width: calc(100% - 28px);
+      width: 100%;
       padding: 20px 0;
     }
     .profile-card {
