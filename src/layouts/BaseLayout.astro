@@ -20,12 +20,6 @@ const { title, description, lang = "en" } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <ClientRouter />
     <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
     <slot />
@@ -33,8 +27,26 @@ const { title, description, lang = "en" } = Astro.props;
 </html>
 
 <style is:global>
+  @font-face {
+    font-family: "Baloo 2";
+    src: url("/fonts/baloo-2-variable.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/inter-variable.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+  }
+
   :root {
     color-scheme: light;
+    --font-heading: "Baloo 2", sans-serif;
+    --font-body: "Inter", sans-serif;
     /* Core interface */
     --background: #fbf9f3;
     --headline: #6f779d;
@@ -79,7 +91,15 @@ const { title, description, lang = "en" } = Astro.props;
     margin: 0;
     background: var(--paper);
     color: var(--ink);
-    font-family: "DM Sans", sans-serif;
+    font-family: var(--font-body);
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
   }
   a {
     color: inherit;
@@ -89,16 +109,14 @@ const { title, description, lang = "en" } = Astro.props;
     margin: 0 0 8px;
     color: var(--subheadline);
     font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 1.15px;
     line-height: 1.05;
     text-transform: uppercase;
   }
   .section-title {
     margin: 0;
     color: var(--headline);
-    font: 800 clamp(2rem, 4vw, 3rem)/1.1 "Manrope", sans-serif;
-    letter-spacing: -0.04em;
+    font: 800 clamp(2rem, 4vw, 3rem)/1.1 var(--font-heading);
   }
 
   .site-shell {
@@ -252,7 +270,6 @@ const { title, description, lang = "en" } = Astro.props;
     background: rgba(255, 255, 255, 0.85);
     font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
     text-transform: uppercase;
   }
   .profile-copy {
@@ -262,10 +279,7 @@ const { title, description, lang = "en" } = Astro.props;
   }
   .profile-copy h2 {
     margin: 0 0 18px;
-    font:
-      800 clamp(1.7rem, 3vw, 2.2rem)/1 "Manrope",
-      sans-serif;
-    letter-spacing: -0.045em;
+    font: 800 clamp(1.7rem, 3vw, 2.2rem)/1 var(--font-heading);
   }
   .profile-copy p {
     max-width: 28ch;
@@ -305,10 +319,7 @@ const { title, description, lang = "en" } = Astro.props;
   }
   .masthead h1 {
     margin: 0;
-    font:
-      800 clamp(4rem, 8vw, 6.5rem)/0.88 "Manrope",
-      sans-serif;
-    letter-spacing: -0.075em;
+    font: 800 clamp(4rem, 8vw, 6.5rem)/0.88 var(--font-heading);
   }
   .masthead h1 span {
     color: var(--purple);
@@ -413,9 +424,7 @@ const { title, description, lang = "en" } = Astro.props;
     border-radius: 0 0 26px 26px;
   }
   .metric strong {
-    font:
-      800 1.8rem "Manrope",
-      sans-serif;
+    font: 800 1.8rem var(--font-heading);
   }
   .metric span {
     font-size: 0.78rem;
@@ -458,9 +467,7 @@ const { title, description, lang = "en" } = Astro.props;
   }
   .role-card h2 {
     margin: 0 0 8px;
-    font:
-      700 clamp(1.5rem, 3vw, 2rem) "Manrope",
-      sans-serif;
+    font: 700 clamp(1.5rem, 3vw, 2rem) var(--font-heading);
   }
   .role-card p {
     max-width: 65ch;
