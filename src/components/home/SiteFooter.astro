@@ -15,7 +15,11 @@ const year = new Date().getFullYear();
 
 <style>
   .site-footer {
-    padding: 160px 0 72px;
+    display: flex;
+    min-height: max(280px, calc(100svh - 600px - var(--section-gap)));
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 0 72px;
     text-align: center;
   }
   .site-footer p {
@@ -27,7 +31,8 @@ const year = new Date().getFullYear();
   }
   @media (max-width: 650px) {
     .site-footer {
-      padding: 96px 0 110px;
+      min-height: 180px;
+      padding: 0 0 110px;
     }
   }
 </style>

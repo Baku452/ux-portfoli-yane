@@ -71,6 +71,8 @@ const { title, description, lang = "en" } = Astro.props;
     --card-pill-border: #9b7ac9;
     --contact-gradient: linear-gradient(135deg, #d6d8e3 0%, #edeef2 100%);
     --content-gutter: 250px;
+    --section-gap: clamp(64px, 8vh, 96px);
+    --section-scroll-offset: clamp(64px, 7vh, 88px);
     --nav-rail-collapsed: 76px;
     --nav-rail-expanded: var(--content-gutter);
 
@@ -128,8 +130,14 @@ const { title, description, lang = "en" } = Astro.props;
     min-height: 100vh;
   }
   .content-layout {
+    display: flex;
     width: calc(100% - (var(--content-gutter) * 2));
+    flex-direction: column;
+    gap: var(--section-gap);
     margin: 0 auto;
+  }
+  .content-layout [data-nav-section] {
+    scroll-margin-top: var(--section-scroll-offset);
   }
 
   .side-rail {
@@ -272,15 +280,22 @@ const { title, description, lang = "en" } = Astro.props;
   }
   .side-rail nav a:hover,
   .side-rail nav a:focus-visible,
-  .side-rail nav a.active {
+  .side-rail nav a.active,
+  .rail-mail:hover,
+  .rail-mail:focus-visible,
+  .rail-mail.active {
     background: var(--lavender-soft);
     color: var(--button-text);
     outline: none;
+  }
+  .side-rail:not(.is-expanded) nav a.active {
+    width: 44px;
   }
 
   .portfolio-grid {
     display: grid;
     width: 100%;
+    min-height: 100svh;
     margin: auto;
     padding: 52px 0;
     grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
@@ -565,6 +580,8 @@ const { title, description, lang = "en" } = Astro.props;
   @media (max-width: 650px) {
     :root {
       --content-gutter: 14px;
+      --section-gap: clamp(48px, 7vh, 72px);
+      --section-scroll-offset: 64px;
     }
     .site-shell {
       display: block;
@@ -591,6 +608,7 @@ const { title, description, lang = "en" } = Astro.props;
       width: auto;
     }
     .side-rail nav {
+      width: auto;
       flex-direction: row;
     }
     .side-rail nav a {
@@ -598,9 +616,6 @@ const { title, description, lang = "en" } = Astro.props;
       grid-template-columns: 44px;
     }
     .side-rail .nav-label {
-      display: none;
-    }
-    .rail-mail {
       display: none;
     }
     .language-toggle {

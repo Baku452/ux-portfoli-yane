@@ -88,23 +88,38 @@ const { labels } = Astro.props;
   const links = document.querySelectorAll<HTMLAnchorElement>(
     '.side-rail a[href^="#"]',
   );
-  const sections = document.querySelectorAll<HTMLElement>("[data-nav-section]");
-  const observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
+  const sections = [...document.querySelectorAll<HTMLElement>("[data-nav-section]")];
+  let activeFrame = 0;
 
-        links.forEach((link) => {
-          const active = link.hash === `#${entry.target.id}`;
-          link.classList.toggle("active", active);
+  const updateActiveLink = () => {
+    const marker = window.innerHeight * 0.35;
+    let current: HTMLElement | undefined = sections[0];
 
-          if (active) link.setAttribute("aria-current", "location");
-          else link.removeAttribute("aria-current");
-        });
-      }
-    },
-    { rootMargin: "-20% 0px -60% 0px" },
-  );
+    for (const section of sections) {
+      if (section.getBoundingClientRect().top <= marker) current = section;
+    }
 
-  sections.forEach((section) => observer.observe(section));
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+      current = sections.at(-1);
+    }
+
+    links.forEach((link) => {
+      const active = link.hash === `#${current?.id}` && !link.classList.contains("monogram");
+      link.classList.toggle("active", active);
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  };
+
+  const scheduleActiveUpdate = () => {
+    if (activeFrame) return;
+    activeFrame = requestAnimationFrame(() => {
+      activeFrame = 0;
+      updateActiveLink();
+    });
+  };
+
+  window.addEventListener("scroll", scheduleActiveUpdate, { passive: true });
+  window.addEventListener("resize", scheduleActiveUpdate);
+  updateActiveLink();
 </script>
