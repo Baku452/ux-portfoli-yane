@@ -71,6 +71,8 @@ const { title, description, lang = "en" } = Astro.props;
     --card-pill-border: #9b7ac9;
     --contact-gradient: linear-gradient(135deg, #d6d8e3 0%, #edeef2 100%);
     --content-gutter: 250px;
+    --nav-rail-collapsed: 76px;
+    --nav-rail-expanded: var(--content-gutter);
 
     /* Semantic aliases used by the site */
     --ink: var(--subheadline);
@@ -136,14 +138,20 @@ const { title, description, lang = "en" } = Astro.props;
     left: 0;
     z-index: 20;
     display: flex;
+    width: var(--nav-rail-collapsed);
+    max-width: var(--nav-rail-expanded);
     height: 100vh;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
+    overflow: hidden;
     padding: 30px 12px;
     border-right: 1px solid var(--illustration-tertiary);
     background: rgb(255 255 255 / 88%);
     backdrop-filter: blur(18px);
+  }
+  .side-rail.is-expanded {
+    width: var(--nav-rail-expanded);
   }
 
   .monogram {
@@ -158,10 +166,38 @@ const { title, description, lang = "en" } = Astro.props;
   }
   .side-rail nav {
     display: flex;
+    width: 100%;
     flex-direction: column;
     gap: 10px;
   }
-  .side-rail nav a,
+  .side-rail nav a {
+    display: grid;
+    width: 100%;
+    height: 44px;
+    grid-template-columns: 44px minmax(0, 1fr);
+    align-items: center;
+    border-radius: 13px;
+    color: var(--lavender);
+    transition: background-color 180ms ease, color 180ms ease;
+  }
+  .side-rail nav a > svg {
+    justify-self: center;
+  }
+  .side-rail .nav-label {
+    overflow: hidden;
+    opacity: 0;
+    color: var(--headline);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13px;
+    line-height: 1.15;
+    white-space: nowrap;
+    visibility: hidden;
+  }
+  .side-rail.is-expanded .nav-label {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 180ms ease 150ms;
+  }
   .rail-mail {
     display: grid;
     width: 44px;
@@ -169,7 +205,7 @@ const { title, description, lang = "en" } = Astro.props;
     place-items: center;
     border-radius: 13px;
     color: var(--lavender);
-    transition: 180ms ease;
+    transition: background-color 180ms ease, color 180ms ease;
   }
   .language-toggle {
     position: fixed;
@@ -228,6 +264,7 @@ const { title, description, lang = "en" } = Astro.props;
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .side-rail .nav-label,
     .toggle-thumb,
     .language-toggle > span:not(.toggle-thumb) {
       transition: none;
@@ -508,6 +545,7 @@ const { title, description, lang = "en" } = Astro.props;
   @media (max-width: 920px) {
     :root {
       --content-gutter: 20px;
+      --nav-rail-expanded: 135px;
     }
     .portfolio-grid {
       width: min(680px, 100%);
@@ -539,15 +577,28 @@ const { title, description, lang = "en" } = Astro.props;
       bottom: 12px;
       left: 12px;
       width: auto;
+      max-width: none;
       height: 62px;
       flex-direction: row;
       padding: 9px 12px;
       border: 1px solid var(--illustration-tertiary);
       border-radius: 20px;
       box-shadow: 0 14px 38px rgb(111 119 157 / 18%);
+      animation: none;
+      align-items: center;
+    }
+    .side-rail.is-expanded {
+      width: auto;
     }
     .side-rail nav {
       flex-direction: row;
+    }
+    .side-rail nav a {
+      width: 44px;
+      grid-template-columns: 44px;
+    }
+    .side-rail .nav-label {
+      display: none;
     }
     .rail-mail {
       display: none;

@@ -9,25 +9,26 @@ interface Props {
 const { labels } = Astro.props;
 ---
 
-<aside class="side-rail">
+<aside class="side-rail" data-nav-rail>
   <a class="monogram" href="#top" aria-label={labels.home}>
     <img src="/favicon.svg" alt="" width="47" height="47" />
   </a>
   <nav aria-label={labels.home}>
     <a class="active" href="#top" aria-label={labels.home}>
       <Icon name="hugeicons:home-03" size={20} />
+      <span class="nav-label">{labels.home}</span>
     </a>
-    <a href="#projects" aria-label={labels.selectedWork}>
+    <a href="#projects" aria-label={labels.projects}>
       <Icon name="hugeicons:grid-view" size={20} />
+      <span class="nav-label">{labels.projects}</span>
     </a>
     <a href="#study-cases" aria-label={labels.caseStudies}>
       <Icon name="hugeicons:file-01" size={20} />
+      <span class="nav-label">{labels.caseStudies}</span>
     </a>
     <a href="#about-me" aria-label={labels.about}>
       <Icon name="hugeicons:user" size={20} />
-    </a>
-    <a href="#contact" aria-label={labels.email}>
-      <Icon name="hugeicons:mail-01" size={20} />
+      <span class="nav-label">{labels.about}</span>
     </a>
   </nav>
   <a class="rail-mail" href="#contact" aria-label={labels.email}>
@@ -36,9 +37,58 @@ const { labels } = Astro.props;
 </aside>
 
 <script>
-  const links = document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]');
+  const rail = document.querySelector<HTMLElement>("[data-nav-rail]");
+  const compactNav = window.matchMedia("(max-width: 650px)");
+  let widthAnimation: Animation | undefined;
+
+  if (rail) {
+    const updateRail = () => {
+      if (compactNav.matches) {
+        widthAnimation?.cancel();
+        rail.classList.remove("is-expanded");
+        return;
+      }
+
+      const expanded = rail.matches(":hover") || !!rail.querySelector(":focus-visible");
+      if (rail.classList.contains("is-expanded") === expanded) return;
+
+      const start = rail.getBoundingClientRect().width;
+      const target = expanded
+        ? parseFloat(getComputedStyle(rail).getPropertyValue("--nav-rail-expanded"))
+        : parseFloat(getComputedStyle(rail).getPropertyValue("--nav-rail-collapsed"));
+
+      widthAnimation?.cancel();
+      rail.classList.toggle("is-expanded", expanded);
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      widthAnimation = rail.animate(
+        expanded
+          ? [
+              { width: `${start}px`, offset: 0 },
+              { width: `${target}px`, offset: 0.76 },
+              { width: `${target - 5}px`, offset: 0.89 },
+              { width: `${target}px`, offset: 1 },
+            ]
+          : [{ width: `${start}px` }, { width: `${target}px` }],
+        {
+          duration: expanded ? 420 : 260,
+          easing: expanded ? "ease-out" : "ease-in-out",
+        },
+      );
+    };
+
+    rail.addEventListener("pointerenter", updateRail);
+    rail.addEventListener("pointerleave", updateRail);
+    rail.addEventListener("focusin", updateRail);
+    rail.addEventListener("focusout", () => queueMicrotask(updateRail));
+    compactNav.addEventListener("change", updateRail);
+  }
+
+  const links = document.querySelectorAll<HTMLAnchorElement>(
+    '.side-rail a[href^="#"]',
+  );
   const sections = document.querySelectorAll<HTMLElement>("[data-nav-section]");
-  console.log(sections);
   const observer = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
