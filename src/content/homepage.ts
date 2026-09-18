@@ -344,11 +344,6 @@ export const homepages: Record<Locale, Homepage> = {
           role: "Programadora",
           organization: "VALENCIA TRAVEL",
         },
-        {
-          period: "2020 · actualidad",
-          role: "Diseño y Programación",
-          organization: "FREELANCE",
-        },
       ],
       skills: [
         "Figma",
