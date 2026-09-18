@@ -83,7 +83,7 @@ export interface Homepage {
 }
 
 const shared = {
-  name: "Yanela Alvarez",
+  name: "Aurora Alvarez",
   email: "hello@example.com",
   experienceStartYear: 2024,
   projectCount: "03",
@@ -390,7 +390,7 @@ export const homepages: Record<Locale, Homepage> = {
       viewCaseStudy: "Ver caso completo",
       profileDetails: "Detalles del perfil",
       downloadCv: "Descargar CV",
-      portraitAlt: "Retrato de Yanela Alvarez",
+      portraitAlt: "Retrato de Yanela Aurora Alvarez",
       languageSwitch: "Switch to English",
     },
   },
