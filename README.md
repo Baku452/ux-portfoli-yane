@@ -4,7 +4,9 @@ A static portfolio built with Astro. All content lives in the repository, so the
 
 ## Edit the portfolio
 
-Update the homepage text and services in `src/content/homepage.ts`. Layout and styles live in `src/pages/index.astro`, and public assets belong in `public/`.
+Update the homepage text and services in `src/content/homepage.ts`. Layout and styles live in `src/components/` and `src/layouts/`; public assets belong in `public/`.
+
+For a non-technical walkthrough of adding projects and case studies in both languages, see [Guía de Proyectos y Casos de Estudio](GUIA_PROYECTOS_Y_CASOS.md).
 
 ## Develop locally
 
@@ -12,10 +14,11 @@ Requires Node.js 22.12 or newer.
 
 ```sh
 npm install
-npm run dev
+npm run dev -- --background
 ```
 
 Open `http://localhost:4321`.
+Use `npx astro dev status`, `npx astro dev logs`, and `npx astro dev stop` to manage the background server.
 
 ## Build and preview
 
