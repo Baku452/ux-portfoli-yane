@@ -61,6 +61,7 @@ const { title, description, lang = "en" } = Astro.props;
     --illustration-tertiary: #d9dbe5;
     --highlight-purple: #9b7ac9;
     --highlight-green: #1e5b47;
+    --highlight-mint: #cfe8dd;
     --highlight-yellow: #f1cb8c;
 
     /* Case-study and project pills */
@@ -78,7 +79,7 @@ const { title, description, lang = "en" } = Astro.props;
     --lavender: var(--headline);
     --lavender-soft: var(--illustration-tertiary);
     --purple: var(--highlight-purple);
-    --mint: var(--highlight-green);
+    --mint: var(--highlight-mint);
     --sand: var(--highlight-yellow);
     --radius: 28px;
   }
@@ -436,7 +437,8 @@ const { title, description, lang = "en" } = Astro.props;
   }
   .experience {
     background: var(--mint);
-    color: var(--illustration-main);
+    color: var(--highlight-green);
+    border-radius: 26px 26px 0 0;
   }
   .projects {
     background: var(--lavender);

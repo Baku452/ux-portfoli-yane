@@ -1,0 +1,33 @@
+---
+import type { Homepage } from "../../content/homepage";
+
+interface Props {
+  page: Homepage;
+}
+
+const { page } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <p>© {page.name.toUpperCase()} — {year}</p>
+</footer>
+
+<style>
+  .site-footer {
+    padding: 160px 0 72px;
+    text-align: center;
+  }
+  .site-footer p {
+    margin: 0;
+    color: var(--subheadline);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+  }
+  @media (max-width: 650px) {
+    .site-footer {
+      padding: 96px 0 110px;
+    }
+  }
+</style>

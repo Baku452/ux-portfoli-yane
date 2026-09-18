@@ -7,6 +7,7 @@ import Hero from "./home/Hero.astro";
 import Projects from "./home/projects/Projects.astro";
 import StudyCase from "./home/study-case/StudyCase.astro";
 import Services from "./home/Services.astro";
+import SiteFooter from "./home/SiteFooter.astro";
 import LanguageSwitch from "./site/LanguageSwitch.astro";
 import NavBar from "./site/NavBar.astro";
 import type { Homepage } from "../content/homepage";
@@ -51,6 +52,7 @@ const { page } = Astro.props;
       <StudyCase page={page} />
       <AboutMe page={page} />
       <Contact page={page} />
+      <SiteFooter page={page} />
     </main>
   </div>
 </BaseLayout>
